@@ -39,11 +39,10 @@
 
 ## Задание 1.1
 Python:
-![image](https://user-images.githubusercontent.com/114160427/192848452-0d54ed76-6122-4813-88ea-4843521a4a8c.png)
-![image](https://user-images.githubusercontent.com/114160427/192848601-4d0926d5-8476-4fe7-a9f8-e1032fc3d841.png)
+py_hello_1.png 
+py_hello_2.png
 Unity:
-
-![image](https://user-images.githubusercontent.com/114160427/192849771-65181767-9764-4f9d-ac56-f4e2f28dc257.png)
+unity_hello.png
 
 ## Задание 1
 ### Пошагово выполнить каждый пункт раздела "ход работы" с описанием и примерами реализации задач
