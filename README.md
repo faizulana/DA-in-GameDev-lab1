@@ -39,12 +39,12 @@
 
 ## Задание 1.1
 Python:
-![image](https://github.com/faizulana/DA-in-GameDev-lab1/blob/30d0fc6f2b8a7b33515a3bd73dce5a7d86ae773c/py_hello_1.png)
-![image](https://github.com/faizulana/DA-in-GameDev-lab1/blob/30d0fc6f2b8a7b33515a3bd73dce5a7d86ae773c/py_hello_2.png)
+![image](py_hello_1.png)
+![image](py_hello_2.png)
 
 Unity:
 
-![image](https://github.com/faizulana/DA-in-GameDev-lab1/blob/118ca7efc57ac4cba5af81a3952ed22966060afd/unity_hello.png)
+![image](unity_hello.png)
 
 ## Задание 1
 ### Пошагово выполнить каждый пункт раздела "ход работы" с описанием и примерами реализации задач
