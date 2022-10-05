@@ -46,7 +46,7 @@ Unity:
 
 ![image](unity_hello.png)
 
-## Задание 1
+## Задание 2
 ### Пошагово выполнить каждый пункт раздела "ход работы" с описанием и примерами реализации задач
 Ход работы:
 - Произвести подготовку данных для работы с алгоритмом линейной регрессии. 10 видов данных были установлены случайным образом, и данные находились в линейной зависимости. Данные преобразуются в формат массива, чтобы их можно было вычислить напрямую при использовании умножения и сложения.
@@ -68,17 +68,23 @@ y = np.array(y)
 
 #Show the effect of a scatter plot
 plt.scatter(x,y)
-
+```
+- Определите связанные функции. Функция модели: определяет модель линейной регрессии wx+b. 
+```py
 #Define the basic linear regression model wx+ b
 def model(a, b, x):
     return a*x + b
-
+```
+Функция потерь: функция потерь среднеквадратичной ошибки. 
+```py
 #Define the function of mean variance difference
 def loss_function(a, b, x, y):
     num = len(x)
     prediction=model(a,b,x)
     return (0.5/num) * (np.square(prediction-y)).sum()
-
+```
+Функция оптимизации: метод градиентного спуска для нахождения частных производных w и b.
+```py
 #To define the optimization function using partial derivatives to update two parameters a and b
 def optimize(a,b,x,y):
     num = len(x)
@@ -97,7 +103,6 @@ def iterate(a,b,x,y,times):
         a,b = optimize(a,b,x,y)
     return a,b
 
-
 #Initialize parameters and display
 a = np.random.rand(1)
 print(a)
@@ -107,41 +112,6 @@ Lr = 0.000001
 
 #For each iteration, the parameter values, losses, and visualization after the
 #iteration are displayed
-a,b = iterate(a,b,x,y,1)
-prediction=model(a,b,x)
-loss = loss_function(a, b, x, y)
-print(a,b,loss)
-plt.scatter(x,y)
-plt.plot(x,prediction)
-
-a,b = iterate(a,b,x,y,2)
-prediction=model(a,b,x)
-loss = loss_function(a, b, x, y)
-print(a,b,loss)
-plt.scatter(x,y)
-plt.plot(x,prediction)
-
-a,b = iterate(a,b,x,y,3)
-prediction=model(a,b,x)
-loss = loss_function(a, b, x, y)
-print(a,b,loss)
-plt.scatter(x,y)
-plt.plot(x,prediction)
-
-a,b = iterate(a,b,x,y,4)
-prediction=model(a,b,x)
-loss = loss_function(a, b, x, y)
-print(a,b,loss)
-plt.scatter(x,y)
-plt.plot(x,prediction)
-
-a,b = iterate(a,b,x,y,5)
-prediction=model(a,b,x)
-loss = loss_function(a, b, x, y)
-print(a,b,loss)
-plt.scatter(x,y)
-plt.plot(x,prediction)
-
 a,b = iterate(a,b,x,y,10000)
 prediction=model(a,b,x)
 loss = loss_function(a, b, x, y)
@@ -150,22 +120,32 @@ plt.scatter(x,y)
 plt.plot(x,prediction)
 
 ```
-
-- Определите связанные функции. Функция модели: определяет модель линейной регрессии wx+b. Функция потерь: функция потерь среднеквадратичной ошибки. Функция оптимизации: метод градиентного спуска для нахождения частных производных w и b.
-
-
-## Задание 2
-### Должна ли величина loss стремиться к нулю при изменении исходных данных? Ответьте на вопрос, приведите пример выполнения кода, который подтверждает ваш ответ.
- Величина loss должна стремиться к нулю в процессе оптимизации, так как величина loss зависит от изменения подобранных весов. Чем лучше обучена модель, тем точнее будут предсказания, а значит меньше будет значение loss. Это можно увидеть на примере кода из задания 1: при каждой итерации значение loss становится меньше. 
- 
 ## Задание 3
+### Должна ли величина loss стремиться к нулю при изменении исходных данных? Ответьте на вопрос, приведите пример выполнения кода, который подтверждает ваш ответ.
+ Величина loss должна стремиться к нулю в процессе оптимизации, так как величина loss зависит от изменения подобранных весов. Чем лучше обучена модель, тем точнее будут предсказания, а значит меньше будет значение loss. 
+ Пример кода:
+ ```py
+a,b = iterate(a,b,x,y,10000)
+prediction=model(a,b,x)
+loss = loss_function(a, b, x, y)
+ ```
+
 ### Какова роль параметра Lr? Ответьте на вопрос, приведите пример выполнения кода, который подтверждает ваш ответ. В качестве эксперимента можете изменить значение параметра.
 Lr - это learning Rate, коэффициент скорости обучения. Он определяет, насколько будут меняться веса параметров
  при каждой итерации. От него зависят возможная точность получившейся модели и скорость ее обучения. 
  Понять роль этого параметра можно рассмотрев функцию Optimize, определенную выше, в которой коэффициенты a и b изменяются на
  значение производной, умноженное на коэффициент Lr. Чем выше коэффициент, тем больший "шаг" будет у функции
- Увидеть действие параметра также можно, изменив его значение и сравнив получившиеся графики с исходными. Чем выше коэффициент, 
- тем больше разница в угловых коэффициентах прямых, выводимых в процессе оптимизации. 
+ Пример кода:
+ ```py
+def optimize(a,b,x,y):
+    num = len(x)
+    prediction = model(a,b,x)
+    da = (1.0/num) * ((prediction -y)*x).sum()
+    db = (1.0/num) * ((prediction -y).sum())
+    a = a - Lr*da
+    b = b - Lr*db
+    return a, b
+ ```
 
 ## Выводы
 
